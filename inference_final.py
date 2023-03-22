@@ -37,8 +37,8 @@ def train():
     model = Model_load()
     model.eval()
     
-    #test_dataset = BokehDataset("./test_data", transform=ToTensor())
-    test_dataset = BokehDataset("/home2/chenzigeng/Bokeh_v7/val", transform=ToTensor())
+    test_dataset = BokehDataset("./test_data", transform=ToTensor())
+    #test_dataset = BokehDataset("/home2/chenzigeng/Bokeh_v7/val", transform=ToTensor())
     test_dataloader = DataLoader(test_dataset, batch_size=1, shuffle=True,num_workers=2)
 
     test_iter = iter(test_dataloader)
@@ -69,24 +69,27 @@ def train():
         output_cond = batch["output_cond"].cuda()
         
         extent = output_cond[0][0].item()
+        disparity = batch["disparity"].cuda()
         id = batch["id"]
         print(id,output_cond)
 
         if extent >0.2:
+            #continue
             output = model.inference(batch)
+        
         else:
-            if batch['tgt_blur'] == True:
+            if disparity>0.5:
+                #continue
+                output, target = model.inference(batch)
+            elif batch['tgt_blur'] == True:
                 
                 source = batch["source"].cuda()
                 
                 source_origin = source.clone()
                 
-
                 source_alpha = batch["source_alpha"].cuda()
                 source = source*(1-source_alpha)
                 
-                
-            
                 source = np.array(to_image(torch.squeeze(source.float().detach().cpu())))
                 source = source[:,:,(2,1,0)]
                 cv2.imwrite ( f"src.jpg", source)
@@ -153,9 +156,9 @@ def train():
                 output = torch.clamp(result,min=0.0, max=1.0)
         
 
-        output = np.array(to_image(torch.squeeze(output.float().detach().cpu())))
-        output = output[:,:,(2,1,0)]
-        cv2.imwrite("./result/"+id[0]+".src.jpg", output)
+            output = np.array(to_image(torch.squeeze(output.float().detach().cpu())))
+            output = output[:,:,(2,1,0)]
+            cv2.imwrite("./result/"+id[0]+".src.jpg", output)
         
 
 

@@ -248,22 +248,22 @@ model_path_stack_debokeh_1000 = "/home/chenzigeng/dehaze/NTIRE23BokehTransformat
 # model_path_stack_debokeh_750 = "/home/chenzigeng/dehaze/NTIRE23BokehTransformation/examples/modelzoo_stackfinetune/debokeh128_stackmse_0.75_3_21_epoch0.pth"
 # model_path_stack_debokeh_1000 = "/home/chenzigeng/dehaze/NTIRE23BokehTransformation/examples/modelzoo_stackfinetune/debokeh128_stackmse_1.0_3_21_epoch0.pth"
 
-PATH = "model.pt"
-# model = Model() 
-torch.save({
-            'model_path_bokeh_375': torch.load(model_path_bokeh_375),
-            'model_path_bokeh_625': torch.load(model_path_bokeh_625),
-            'model_path_bokeh_750': torch.load(model_path_bokeh_750),
-            'model_path_bokeh_1000': torch.load(model_path_bokeh_1000),
-            'model_path_debokeh_375': torch.load(model_path_debokeh_375),
-            'model_path_debokeh_625': torch.load(model_path_debokeh_625),
-            'model_path_debokeh_750': torch.load(model_path_debokeh_750),
-            'model_path_debokeh_1000': torch.load(model_path_debokeh_1000),
-            'model_path_stack_debokeh_375': torch.load(model_path_stack_debokeh_375),
-            'model_path_stack_debokeh_625': torch.load(model_path_stack_debokeh_625),
-            'model_path_stack_debokeh_750': torch.load(model_path_stack_debokeh_750),
-            'model_path_stack_debokeh_1000': torch.load(model_path_stack_debokeh_1000),
-            }, PATH)
+# PATH = "model.pt"
+# # model = Model() 
+# torch.save({
+#             'model_path_bokeh_375': torch.load(model_path_bokeh_375),
+#             'model_path_bokeh_625': torch.load(model_path_bokeh_625),
+#             'model_path_bokeh_750': torch.load(model_path_bokeh_750),
+#             'model_path_bokeh_1000': torch.load(model_path_bokeh_1000),
+#             'model_path_debokeh_375': torch.load(model_path_debokeh_375),
+#             'model_path_debokeh_625': torch.load(model_path_debokeh_625),
+#             'model_path_debokeh_750': torch.load(model_path_debokeh_750),
+#             'model_path_debokeh_1000': torch.load(model_path_debokeh_1000),
+#             'model_path_stack_debokeh_375': torch.load(model_path_stack_debokeh_375),
+#             'model_path_stack_debokeh_625': torch.load(model_path_stack_debokeh_625),
+#             'model_path_stack_debokeh_750': torch.load(model_path_stack_debokeh_750),
+#             'model_path_stack_debokeh_1000': torch.load(model_path_stack_debokeh_1000),
+#             }, PATH)
 
-print('save ok!')
-model2 = Model_load()
+# print('save ok!')
+# model2 = Model_load()

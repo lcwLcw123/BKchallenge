@@ -14,8 +14,8 @@ class BokehDataset(Dataset):
 
         self._source_paths = sorted(glob.glob(osp.join(root_folder, "*.src.jpg")))
         self._meta_data = self._read_meta_data(osp.join(root_folder, "meta.txt"))
-        #self._source_alpha_paths = sorted(glob.glob(osp.join(root_folder, "*.mask_src.png")))
-        self._source_alpha_paths = sorted(glob.glob(osp.join(root_folder, "*.227noshreshold306000_src.png")))
+        self._source_alpha_paths = sorted(glob.glob(osp.join(root_folder, "*.mask_src.png")))
+        #self._source_alpha_paths = sorted(glob.glob(osp.join(root_folder, "*.227noshreshold306000_src.png")))
 
 
 
