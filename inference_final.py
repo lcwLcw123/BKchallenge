@@ -73,7 +73,7 @@ def train():
         id = batch["id"]
         print(id,output_cond)
 
-        if extent >0.2:
+        if extent >0.3:
             #continue
             output = model.inference(batch)
         
