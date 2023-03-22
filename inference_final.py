@@ -73,93 +73,91 @@ def train():
         id = batch["id"]
         print(id,output_cond)
 
-        if extent >0.3:
-            #continue
+        if extent >0.2:
             output = model.inference(batch)
         
-        # else:
-        #     if disparity>0.5:
-        #         #continue
-        #         output, target = model.inference(batch)
-        #     elif batch['tgt_blur'] == True:
+        else:
+            if disparity>0.5:
+                output = model.inference(batch)
+            elif batch['tgt_blur'] == True:
                 
-        #         source = batch["source"].cuda()
+                source = batch["source"].cuda()
                 
-        #         source_origin = source.clone()
+                source_origin = source.clone()
                 
-        #         source_alpha = batch["source_alpha"].cuda()
-        #         source = source*(1-source_alpha)
+                source_alpha = batch["source_alpha"].cuda()
+                source = source*(1-source_alpha)
                 
-        #         source = np.array(to_image(torch.squeeze(source.float().detach().cpu())))
-        #         source = source[:,:,(2,1,0)]
-        #         cv2.imwrite ( f"src.jpg", source)
+                source = np.array(to_image(torch.squeeze(source.float().detach().cpu())))
+                source = source[:,:,(2,1,0)]
+                cv2.imwrite ( f"src.jpg", source)
 
 
-        #         path ="src.jpg"
+                path ="src.jpg"
                 
-        #         img_bytes = file_client.get(path, None)
+                img_bytes = file_client.get(path, None)
                 
                 
-        #         try:
-        #             img = imfrombytes(img_bytes, float32=True)
+                try:
+                    img = imfrombytes(img_bytes, float32=True)
                     
                     
-        #         except:
-        #             raise Exception("path {} not working".format(img_path))
+                except:
+                    raise Exception("path {} not working".format(img_path))
 
-        #         img = img2tensor(img, bgr2rgb=True, float32=True)
+                img = img2tensor(img, bgr2rgb=True, float32=True)
                 
 
 
-        #         model_bokeh.feed_data(data={'lq': img.unsqueeze(dim=0)})
-        #         model_bokeh.test()
-        #         visuals = model_bokeh.get_current_visuals()
-        #         result = visuals['result']
-        #         result = result.cuda() + source_origin*source_alpha
-        #         output = torch.clamp(result,min=0.0, max=1.0)
+                model_bokeh.feed_data(data={'lq': img.unsqueeze(dim=0)})
+                model_bokeh.test()
+                visuals = model_bokeh.get_current_visuals()
+                result = visuals['result']
+                result = result.cuda() + source_origin*source_alpha
+                output = torch.clamp(result,min=0.0, max=1.0)
                 
 
 
 
-        #     elif batch['tgt_blur'] == False:
+            elif batch['tgt_blur'] == False:
 
-        #         source = batch["source"].cuda()
+                source = batch["source"].cuda()
 
-        #         source_origin = source.clone()
+                source_origin = source.clone()
 
-        #         source_alpha = batch["source_alpha"].cuda()
-        #         source = source*(1-source_alpha)
+                source_alpha = batch["source_alpha"].cuda()
+                source = source*(1-source_alpha)
                 
             
-        #         source = np.array(to_image(torch.squeeze(source.float().detach().cpu())))
-        #         source = source[:,:,(2,1,0)]
-        #         cv2.imwrite ("src.jpg", source)
+                source = np.array(to_image(torch.squeeze(source.float().detach().cpu())))
+                source = source[:,:,(2,1,0)]
+                cv2.imwrite ("src.jpg", source)
 
-        #         path ="src.jpg"
+                path ="src.jpg"
                 
-        #         img_bytes = file_client.get(path, None)
+                img_bytes = file_client.get(path, None)
                 
                 
-        #         try:
-        #             img = imfrombytes(img_bytes, float32=True)
+                try:
+                    img = imfrombytes(img_bytes, float32=True)
                     
-        #         except:
-        #             raise Exception("path {} not working".format(img_path))
+                except:
+                    raise Exception("path {} not working".format(img_path))
 
-        #         img = img2tensor(img, bgr2rgb=True, float32=True)
+                img = img2tensor(img, bgr2rgb=True, float32=True)
 
-        #         model_debokeh.feed_data(data={'lq': img.unsqueeze(dim=0)})
-        #         model_debokeh.test()
-        #         visuals = model_debokeh.get_current_visuals()
-        #         result = visuals['result']
-        #         result = result.cuda() + source_origin*source_alpha
-        #         output = torch.clamp(result,min=0.0, max=1.0)
+                model_debokeh.feed_data(data={'lq': img.unsqueeze(dim=0)})
+                model_debokeh.test()
+                visuals = model_debokeh.get_current_visuals()
+                result = visuals['result']
+                result = result.cuda() + source_origin*source_alpha
+                output = torch.clamp(result,min=0.0, max=1.0)
         
 
-            output = np.array(to_image(torch.squeeze(output.float().detach().cpu())))
-            output = output[:,:,(2,1,0)]
-            cv2.imwrite("./result/"+id[0]+".src.jpg", output)
-        
+        output = np.array(to_image(torch.squeeze(output.float().detach().cpu())))
+        output = output[:,:,(2,1,0)]
+        cv2.imwrite("./result/"+id[0]+".src.jpg", output)
+
 
 
     
