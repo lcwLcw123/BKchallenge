@@ -1,0 +1,9 @@
+
+# jpg
+*.jpg
+
+# png
+*.png
+
+#.pth
+*.pth
