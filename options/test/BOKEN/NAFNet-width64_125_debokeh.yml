@@ -1,0 +1,58 @@
+# ------------------------------------------------------------------------
+# Copyright (c) 2022 megvii-model. All Rights Reserved.
+# ------------------------------------------------------------------------
+# Modified from BasicSR (https://github.com/xinntao/BasicSR)
+# Copyright 2018-2020 BasicSR Authors
+# ------------------------------------------------------------------------
+# general settings
+name: NAFNet-BOKEN-width64-test
+model_type: ImageRestorationModel
+scale: 1
+num_gpu: 1
+manual_seed: 10
+
+datasets:
+
+  val:
+    name: boken-test
+    type: PairedImageDataset
+    dataroot_gt: ./datasets/Boken_new/val/sharp_crops.lmdb
+    dataroot_lq: ./datasets/Boken_new/val/blur_crops.lmdb
+    io_backend:
+      type: lmdb
+
+
+network_g:
+  type: NAFNetLocal
+  width: 64
+  enc_blk_nums: [1, 1, 1, 28]
+  middle_blk_num: 1
+  dec_blk_nums: [1, 1, 1, 1]
+
+# path
+path:
+  pretrain_network_g: saved_models/deboken_net_g_2000.pth
+  #pretrain_network_g: naf_debokeh125.pth
+  strict_load_g: true
+  resume_state: ~
+
+# validation settings
+val:
+  save_img: true
+  grids: false
+
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+      test_y_channel: false
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500

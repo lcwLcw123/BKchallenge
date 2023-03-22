@@ -1,0 +1,57 @@
+# ------------------------------------------------------------------------
+# Copyright (c) 2022 megvii-model. All Rights Reserved.
+# ------------------------------------------------------------------------
+# Modified from BasicSR (https://github.com/xinntao/BasicSR)
+# Copyright 2018-2020 BasicSR Authors
+# ------------------------------------------------------------------------
+# general settings
+name: NAFNet-BOKEN-125-width64
+# 清晰到模糊
+model_type: ImageRestorationModel
+scale: 1
+num_gpu: 1
+manual_seed: 10
+
+datasets:
+  val:
+    name: boken-125-test
+    type: PairedImageDataset
+    dataroot_gt: /home/chenzigeng/dehaze/NTIRE23BokehTransformation/examples/datasets/NAFdata_125_val/train/blur_crops.lmdb
+    dataroot_lq: /home/chenzigeng/dehaze/NTIRE23BokehTransformation/examples/datasets/NAFdata_125_val/train/sharp_crops.lmdb
+    io_backend:
+      type: lmdb
+
+
+network_g:
+  type: NAFNetLocal
+  width: 64
+  enc_blk_nums: [1, 1, 1, 28]
+  middle_blk_num: 1
+  dec_blk_nums: [1, 1, 1, 1]
+
+# path
+path:
+  pretrain_network_g: saved_models/boken_net_g_29500.pth
+  strict_load_g: true
+  resume_state: ~
+
+# validation settings
+val:
+  save_img: true
+  grids: false
+
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 0
+      test_y_channel: false
+    ssim:
+      type: calculate_ssim
+      crop_border: 0
+      test_y_channel: false
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500

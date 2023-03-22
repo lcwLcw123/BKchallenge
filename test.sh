@@ -1,1 +1,1 @@
-CUDA_VISIBLE_DEVICES=1 python IS-Net/Inference.py
+python IS-Net/Inference.py

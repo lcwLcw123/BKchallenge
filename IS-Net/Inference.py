@@ -14,14 +14,15 @@ import torch.nn.functional as F
 from torchvision.transforms.functional import normalize
 
 from models import *
-
+import warnings
+warnings.filterwarnings("ignore")
 
 if __name__ == "__main__":
     # changelleng dataset:
 
-    dataset_path="./dataset"  #Your dataset path
+    dataset_path="./test_data"  #Your dataset path
     checkpoint = torch.load("./saved_models/DIS_model.pth")
-    result_path="./dataset"  #The folder path that you want to save the results
+    result_path="./test_data"  #The folder path that you want to save the results
     input_size=[1024,1024]
     net_real=ISNetDIS()
     net_syn = ISNetDIS()
