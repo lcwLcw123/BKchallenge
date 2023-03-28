@@ -1,7 +1,7 @@
 # CBTNet
 
-## 
-We belive our result can be reproduced, but if there is any problem please concate me
+*We belive our result can be reproduced, but if there is any problem please concate me*
+
 ## Test Results
 Download the test results from [Google Drive](https://drive.google.com/drive/folders/1iTgb7ewXZbCxd7E2EAfYhdiJ_7AZURvJ?usp=share_link).
 
