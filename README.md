@@ -1,6 +1,7 @@
 # CBTNet
 
-
+## 
+We belive our result can be reproduced, but if there is any problem please concate me
 ## Test Results
 Download the test results from [Google Drive](https://drive.google.com/drive/folders/1iTgb7ewXZbCxd7E2EAfYhdiJ_7AZURvJ?usp=share_link).
 
@@ -32,6 +33,9 @@ BKchallenge
 cd BKchallenge
 sh test.sh
 ```
+
+## Reuslt
+the results can be seen in the folder `result`. 
 ## Environment 
 you can look for the 'requirements.txt' to see the requirements
 
