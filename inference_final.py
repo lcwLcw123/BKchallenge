@@ -73,12 +73,13 @@ def train():
         id = batch["id"]
         print(id,output_cond)
 
-        if extent >0.2:
+        if extent >0.3:
             output = model.inference(batch)
-        
+        elif extent == 0.25:
+            continue
         else:
             if disparity>0.5:
-                output = model.inference(batch)
+                continue
             elif batch['tgt_blur'] == True:
                 
                 source = batch["source"].cuda()

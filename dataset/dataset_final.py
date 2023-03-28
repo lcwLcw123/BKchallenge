@@ -50,8 +50,6 @@ class BokehDataset(Dataset):
                 src_lens = 0.75
             elif src_lens == "Sony50mmf1.8BS":
                 src_lens = 0.625
-            elif src_lens == "Sony50mmf1.4BS":
-                src_lens = 0.875
             else:
                 src_lens = 0.0
 
@@ -61,10 +59,17 @@ class BokehDataset(Dataset):
                 tgt_lens = 0.75
             elif tgt_lens == "Sony50mmf1.8BS":
                 tgt_lens = 0.625
-            elif tgt_lens == "Sony50mmf1.4BS":
-                tgt_lens = 0.875
             else:
                 tgt_lens = 0.0
+            
+            if "real" in id:
+                if tgt_lens == 0.625:
+                    tgt_lens = 0.875
+                if src_lens == 0.625:
+                    src_lens = 0.875
+
+
+
             
             disparity = int(disparity)/80
 
